@@ -1,0 +1,22 @@
+Simple CQRS on F# (F-Sharp) 3.0
+
+Based on Greg Young's CQRS: https://github.com/gregoryyoung/m-r/tree/master/SimpleCQRS
+
+This is F# solution. Compared to C#:
+  + Simpler source code
+  + No need for any "InfrastructureCrap"
+  + Domain objects doesn't need to have parameter less constructors
+  + Interactive-driven development
+  (+ No locks, uses Message Passing)
+  
+What you will need to run this:
+  + Visual Studio 11 (Beta): http://www.microsoft.com/visualstudio/11/en-us
+  + Reactive extensions: http://msdn.microsoft.com/en-us/data/gg577609
+
+
+It uses Reactive Extensions (Rx) Subject-class for message bus and a MailboxProcessor for event storage.
+(Either one of them could have been enough by itself.)
+
+
+First version has just command side and event sourcing.
+(Query side is more trivial, I suggest using Type Providers...)
