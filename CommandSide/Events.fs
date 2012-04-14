@@ -1,4 +1,5 @@
-﻿module Events
+﻿// The verbs of the system (in imperfect form)
+module Events
 
     open System
 

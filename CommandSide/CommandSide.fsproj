@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Events.fs" />
     <Compile Include="Domain.fs" />
+    <Compile Include="EventBus.fs" />
     <Compile Include="EventStorage.fs" />
     <Compile Include="Commands.fs" />
     <Compile Include="CommandHandler.fs" />

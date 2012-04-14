@@ -1,4 +1,7 @@
-﻿module Domain
+﻿/// Model: The domain model classes
+/// In this pattern, domain model includes the business logic and their validation rules
+/// and the model is not exact model of every single object and property
+module Domain
 
     open Events
     open System

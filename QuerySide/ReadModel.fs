@@ -1,9 +1,14 @@
-﻿module ReadModel
+﻿/// This is simle readonly-database, a bit like cache
+/// In this sample this uses only in-memory as in real life would use F# Type Providers
+module ReadModel
     
     open Events
+    open EventBus
     open System
     open System.Collections.Generic
     
+    //Type providers would use the compiler to create data transfer objects (dtos)
+
     type InventoryItemDetailsDto(id, name, currentCount) = 
         member x.Id = id
         member val Name = name with get, set
@@ -13,12 +18,14 @@
         member x.Id = id
         member val Name = name with get, set
 
+    /// Database: Would be SQL, or No-SQL
     type InMemoryDatabase() = 
         let details = new Dictionary<Guid,InventoryItemDetailsDto>()
         member x.InventoryItems = new List<InventoryItemListDto>()
         member x.InventoryItemDetails = details
         member x.GetInventoryItemDetails id = details.[id]
 
+    /// View: First screen
     type InventoryListView() = 
         let dbItems = InMemoryDatabase().InventoryItems
         member x.Handle =
@@ -30,8 +37,9 @@
                     let found = dbItems.Find(fun stored -> stored.Id = id)
                     found.Name <- newName
                 | _ -> ignore()
-            EventStorage.MonitorEvents knownEvents
+            EventBus.Subscribe knownEvents
 
+    /// View: Second screen
     type InvenotryItemDetailView() = 
         let dbDetailItem = InMemoryDatabase().InventoryItemDetails
         let getDetailsItem id =
@@ -53,4 +61,4 @@
                 | ItemsRemovedFromInventory(id, count) -> 
                     let d = getDetailsItem id
                     d.Count <- count
-            EventStorage.MonitorEvents knownEvents
+            EventBus.Subscribe knownEvents

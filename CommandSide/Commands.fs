@@ -1,4 +1,5 @@
-﻿module Commands
+﻿// The verbs (actions) of the system (in imperative mood / present tense)
+module Commands
  
     open Events
     open Domain

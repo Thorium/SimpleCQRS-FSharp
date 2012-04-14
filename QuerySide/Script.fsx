@@ -5,20 +5,24 @@
 // Learn more about F# at http://fsharp.net. See the 'F# Tutorial' project
 // for more guidance on F# programming.
 
-#r "System.CoreEx.dll"
-#r "System.Reactive.dll" 
-
 #r "System.Data.Entity.dll"
 #r "FSharp.Data.TypeProviders.dll"
 
 #load "..\CommandSide\Events.fs"
 #load "..\CommandSide\Domain.fs"
+#load "..\CommandSide\EventBus.fs"
 #load "..\CommandSide\EventStorage.fs"
+
+//#r "System.CoreEx.dll"
+//#r "System.Reactive.dll" 
+//#load "..\CommandSide\EventBusRx.fs"
 //#load "..\CommandSide\EventStorageRx.fs"
+
 #load "..\CommandSide\Commands.fs"
 #load "..\CommandSide\CommandHandler.fs"
 
 open Events
+open EventBus
 open System
 open CommandHandler
 open Commands

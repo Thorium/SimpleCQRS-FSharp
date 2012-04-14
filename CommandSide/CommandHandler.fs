@@ -1,4 +1,5 @@
-﻿module CommandHandler
+﻿/// Controller: Takes in the commands
+module CommandHandler
 
     open Domain
     open Events
