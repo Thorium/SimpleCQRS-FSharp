@@ -2,21 +2,32 @@ Simple CQRS on F# (F-Sharp) 3.0
 
 Based on Greg Young's CQRS: https://github.com/gregoryyoung/m-r/tree/master/SimpleCQRS
 
+CQRS is Command and Query Responsibility Segregation -pattern.
+If you don't know that, use Google or look http://martinfowler.com/bliki/CQRS.html
+I have separated command side and query side as different projects.
+
 This is F# solution. Compared to C#:
   + Simpler source code
   + No need for any "InfrastructureCrap"
   + Domain objects doesn't need to have parameter less constructors
   + Interactive-driven development
-  (+ No locks, uses Message Passing)
   
 What you will need to run this:
   + Visual Studio 11 (Beta): http://www.microsoft.com/visualstudio/11/en-us
+
+Optional:
   + Reactive extensions: http://msdn.microsoft.com/en-us/data/gg577609
 
+There are two versions of event storage:
+1) Pure F# as EventStorage.fs
+   - Uses pure .NET Events with F# Observable as event bus
+   - Uses MailboxProcessor ("agents"/message passing) as event storage
+2) F# with Reactive Extensions as EventStorageRx.fs
+   - Uses reactive framework Subject<T> as event bus
+   - Uses reactive framework ReplaySubject<T> as event storage
+Although technical concept is different, the functionality is identical.
 
-It uses Reactive Extensions (Rx) Subject-class for message bus and a MailboxProcessor for event storage.
-(Either one of them could have been enough by itself.)
+You can run this with F# interactive, directly from files and/or using Script.fsx.
 
-
-First version has just command side and event sourcing.
-(Query side is more trivial, I suggest using Type Providers...)
+This QuerySide is just in-memory one as in Greg's example. 
+I suggest using F# Type Providers in QuerySide with real database...

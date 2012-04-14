@@ -17,7 +17,6 @@
         member x.ApplyChange (evt:Event) = 
             x.Apply evt
             changes <- evt :: changes
-            do eventBusSubject.OnNext(evt)
 
     /// Load from event history
     let LoadsFromHistory<'t when 't :> AggregateRoot> (history:Event list) (item:'t) = 

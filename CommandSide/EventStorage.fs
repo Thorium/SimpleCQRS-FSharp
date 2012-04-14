@@ -20,6 +20,10 @@ type EventDescriptor(id:Guid, eventData:Event) =
     member x.Id = id
     member x.EventData = eventData
 
+///Used just to notify others if anyone would be interested
+let public EventBus = new Microsoft.FSharp.Control.Event<Event>()
+let public MonitorEvents (eventHandle: Events.Event -> unit) = EventBus.Publish |> Observable.add(eventHandle)
+
 /// Custom implementation of in-memory time async event storage. Using message passing.
 type EventStorage() =
     let eventstorage = MailboxProcessor.Start(fun ev ->
@@ -29,7 +33,11 @@ type EventStorage() =
                     | Quit -> return ()
                     | SaveEvents(id, events) ->
 
-                        let descriptors = events |> List.map (fun e -> EventDescriptor(id, e))
+                        let storeAndPublish evt =
+                            EventBus.Trigger evt
+                            EventDescriptor(id, evt) 
+
+                        let descriptors = events |> List.map (storeAndPublish)
 
                         return! msgPassing(descriptors @ history)
                     | GetEventsForAggregate(id, reply) ->
@@ -65,7 +73,7 @@ type EventStorage() =
 // Tests for Interactive:         
 let storage = new EventStorage()
 let id = System.Guid.NewGuid()
-(storage :> IRepository).Save (new Item(id, CreateType.New, "testi"))
+(storage :> IRepository).Save (new InventoryItem(id, CreateType.New, "testi"))
 storage.ShowItemHistory id
 storage.Quit
 *)

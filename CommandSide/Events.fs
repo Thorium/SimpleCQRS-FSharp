@@ -6,11 +6,10 @@
     #r "System.CoreEx.dll"
     #r "System.Reactive.dll" 
     *)
-    open System.Collections.Generic
 
     // Events implemented as discriminated union. 
     // If you use a big solution, change to a base type 
-    // or just use many Subjects and concatenate / merge with LINQ 
+    // or just use many event storages and concatenate / merge them with LINQ 
     type Event = 
     | InventoryItemCreated      of Guid * string
     | InventoryItemDeactivated  of Guid
@@ -25,7 +24,3 @@
             | InventoryItemRenamed(i,n) -> "Item renamed to " + n + " created (id:" + i.ToString() + ")"
             | ItemsCheckedInToInventory(i,c) -> "Check-in " + c.ToString() + " of item (id:" + i.ToString() + ")"
             | ItemsRemovedFromInventory(i,c) -> "Removed " + c.ToString() + " of item (id:" + i.ToString() + ")"
-    
-    ///Used just to notify others if anyone would be interested
-    let eventBusSubject = new Subject<Event>()
-    let public EventBus = eventBusSubject :> IObservable<Event>

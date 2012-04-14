@@ -11,6 +11,7 @@
 #load "Events.fs"
 #load "Domain.fs"
 #load "EventStorage.fs"
+//#load "EventStorageRx.fs"
 #load "Commands.fs"
 #load "CommandHandler.fs"
 

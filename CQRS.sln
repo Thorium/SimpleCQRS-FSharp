@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 11
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CommandSide", "CommandSide\CommandSide.fsproj", "{33E62F1D-EB1E-409E-9F2D-159646C3D5C1}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "QuerySide", "QuerySide\QuerySide.fsproj", "{0A31C965-B5E5-46D4-873B-F3C9BD7DB995}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A31C965-B5E5-46D4-873B-F3C9BD7DB995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A31C965-B5E5-46D4-873B-F3C9BD7DB995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A31C965-B5E5-46D4-873B-F3C9BD7DB995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A31C965-B5E5-46D4-873B-F3C9BD7DB995}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33E62F1D-EB1E-409E-9F2D-159646C3D5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33E62F1D-EB1E-409E-9F2D-159646C3D5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E62F1D-EB1E-409E-9F2D-159646C3D5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
