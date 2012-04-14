@@ -2,9 +2,13 @@
 /// Second alternative using reactive extensions (Rx)
 module EventStorage
 
+// Execluded from solution.
+// If you like Rx, you could replace the current EventStorage.fs with this
+
 open Domain
 open Events
 open System
+open EventBus
 
 /// Infrastructure to save and restore data from some storage
 type IRepository =
@@ -23,7 +27,7 @@ type EventStorage() =
     
     let SaveEvents id events = 
         let storeAndPublish evt =
-            eventBusSubject.OnNext evt
+            EventPublisher.OnNext evt
             EventDescriptor(id, evt) 
             |> eventstorage.OnNext
 
