@@ -1,0 +1,5 @@
+This is sample user interface for Simple CQRS F-Sharp.
+
+The base is default C# ASP.NET MVC 4 Application.
+Views are the same as in Greg's UI, but this uses Razor as view engine.
+NuGet is used to get package references.

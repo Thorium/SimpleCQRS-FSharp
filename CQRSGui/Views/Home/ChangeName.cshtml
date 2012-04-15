@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "ChangeName";
+}
+
+@using (Html.BeginForm()) {
+    <p>
+        
+        @InputExtensions.Hidden(Html, "Id", Model.Id)
+        Name:
+        @Html.TextBox("Name")
+        <br /><br />
+        <button name="submit">Submit</button>
+    </p>
+    }

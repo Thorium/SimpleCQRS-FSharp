@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Remove";
+}
+
+@using (Html.BeginForm()){
+    <p>
+        @InputExtensions.Hidden(Html, "Id",Model.Id)
+        Number: @Html.TextBox("Number")
+        <br /><br />
+    <button name="submit">Submit</button>
+    </p>
+    }

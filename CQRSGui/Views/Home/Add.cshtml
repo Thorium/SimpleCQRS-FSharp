@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+
+    @using (Html.BeginForm()){
+        <p>Name: 
+        @Html.TextBox("Name")
+        <br /><br />
+        <button name="submit">Submit</button>
+        </p>
+    }

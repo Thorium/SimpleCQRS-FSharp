@@ -1,0 +1,19 @@
+@using CQRSGui.Controllers
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>All items:</h2>
+
+<ol class="round">
+@foreach (var inventoryItemListDto in Model) {
+    <li>
+        @{
+            var link = LinkExtensions.ActionLink(Html, "Name: " + inventoryItemListDto.Name, "Details", new {Id = inventoryItemListDto.Id});
+        }
+        @link
+    </li>
+    }
+    </ol>
+@Html.ActionLink("Add","Add")
+
