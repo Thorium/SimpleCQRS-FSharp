@@ -11,7 +11,7 @@ module CommandHandler
 
     let Storage = new EventStorage() :> IRepository
 
-    let AsyncCommandHandler (msg:Command) = 
+    let AsyncHandle (msg:Command) = 
         async {
             let action = 
                 let fetchitem id = new InventoryItem(id) |> Storage.GetHistoryById id
@@ -48,6 +48,6 @@ module CommandHandler
             action |> ignore
         }
         
-    let CommandHandler (msg:Command) =  AsyncCommandHandler msg |> Async.RunSynchronously
+    let Handle (msg:Command) =  AsyncHandle msg |> Async.RunSynchronously
 
     //Examples in Scripts.fsx
