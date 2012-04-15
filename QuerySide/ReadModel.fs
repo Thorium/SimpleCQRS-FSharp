@@ -19,46 +19,45 @@ module ReadModel
         member val Name = name with get, set
 
     /// Database: Would be SQL, or No-SQL
-    type InMemoryDatabase() = 
-        let details = new Dictionary<Guid,InventoryItemDetailsDto>()
-        member x.InventoryItems = new List<InventoryItemListDto>()
-        member x.InventoryItemDetails = details
-        member x.GetInventoryItemDetails id = details.[id]
+    let private inventoryitems = new List<InventoryItemListDto>()
+    let private detailitems = new Dictionary<Guid,InventoryItemDetailsDto>()
+    type InMemoryDatabase = 
+        static member InventoryItems = inventoryitems
+        static member InventoryItemDetails = detailitems
 
     /// View: First screen
-    type InventoryListView() = 
-        let dbItems = InMemoryDatabase().InventoryItems
-        member x.Handle =
-            let knownEvents e =
-                match e with
-                | InventoryItemCreated(id, name) -> dbItems.Add(new InventoryItemListDto(id, name))
-                | InventoryItemDeactivated(id) ->  dbItems.RemoveAll(fun stored -> stored.Id = id) |> ignore
-                | InventoryItemRenamed(id, newName) -> 
-                    let found = dbItems.Find(fun stored -> stored.Id = id)
-                    found.Name <- newName
-                | _ -> ignore()
-            EventBus.Subscribe knownEvents
+    let RegisterHandlersInventoryListView() = 
+        let dbItems = InMemoryDatabase.InventoryItems
+        let knownEvents e =
+            match e with
+            | InventoryItemCreated(id, name) -> dbItems.Add(new InventoryItemListDto(id, name))
+            | InventoryItemDeactivated(id) ->  dbItems.RemoveAll(fun stored -> stored.Id = id) |> ignore
+            | InventoryItemRenamed(id, newName) -> 
+                let found = dbItems.Find(fun stored -> stored.Id = id)
+                found.Name <- newName
+            | _ -> ignore()
+        EventBus.Subscribe knownEvents
 
     /// View: Second screen
-    type InvenotryItemDetailView() = 
-        let dbDetailItem = InMemoryDatabase().InventoryItemDetails
+    let RegisterHandlersInvenotryItemDetailView() = 
+        let dbDetailItem = InMemoryDatabase.InventoryItemDetails
         let getDetailsItem id =
             let found = dbDetailItem.TryGetValue id
             match fst found with
             | true -> snd found
             | false -> failwith("did not find the original inventory this shouldnt happen")
-        member x.Handle =
-            let knownEvents e =
-                match e with
-                | InventoryItemCreated(id, name) -> dbDetailItem.Add(id, new InventoryItemDetailsDto(id, name, 0));
-                | InventoryItemDeactivated(id) -> dbDetailItem.Remove(id) |> ignore
-                | InventoryItemRenamed(id, newName) -> 
-                    let d = getDetailsItem id
-                    d.Name <- newName
-                | ItemsCheckedInToInventory(id, count) -> 
-                    let d = getDetailsItem id
-                    d.Count <- count
-                | ItemsRemovedFromInventory(id, count) -> 
-                    let d = getDetailsItem id
-                    d.Count <- count
-            EventBus.Subscribe knownEvents
+
+        let knownEvents e =
+            match e with
+            | InventoryItemCreated(id, name) -> dbDetailItem.Add(id, new InventoryItemDetailsDto(id, name, 0));
+            | InventoryItemDeactivated(id) -> dbDetailItem.Remove(id) |> ignore
+            | InventoryItemRenamed(id, newName) -> 
+                let d = getDetailsItem id
+                d.Name <- newName
+            | ItemsCheckedInToInventory(id, count) -> 
+                let d = getDetailsItem id
+                d.Count <- d.Count + count
+            | ItemsRemovedFromInventory(id, count) -> 
+                let d = getDetailsItem id
+                d.Count <- d.Count - count
+        EventBus.Subscribe knownEvents

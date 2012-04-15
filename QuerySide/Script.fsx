@@ -31,8 +31,11 @@ open Commands
 
 open ReadModel
 
-let listView = new InventoryListView()
-let detailsView = new InvenotryItemDetailView()
+RegisterHandlersInventoryListView()
+RegisterHandlersInvenotryItemDetailView()
 
 let itemId1 = Guid.NewGuid()
-CreateInventoryItem(itemId1, "MyItem") |> CommandHandler
+CreateInventoryItem(itemId1, "MyItem") |> Handle
+
+let storedItemName = InMemoryDatabase.InventoryItems.[0].Name
+let storedDetailName = InMemoryDatabase.InventoryItemDetails.[itemId1].Name
