@@ -29,12 +29,12 @@ open CommandHandler
 
 // Some testing:
 let itemId1 = Guid.NewGuid()
-CreateInventoryItem(itemId1, "MyItem") |> CommandHandler
-CheckInItemsToInventory(itemId1, 10) |> CommandHandler
-CheckInItemsToInventory(itemId1, 20) |> CommandHandler
-//CheckInItemsToInventory(itemId1, -20) |> CommandHandler
-RemoveItemsFromInventory(itemId1, 5) |> CommandHandler
-RenameInventoryItem(itemId1, "NewItemName") |> CommandHandler
-DeactivateInventoryItem(itemId1) |> CommandHandler
+CreateInventoryItem(itemId1, "MyItem") |> Handle
+CheckInItemsToInventory(itemId1, 10) |> Handle
+CheckInItemsToInventory(itemId1, 20) |> Handle
+//CheckInItemsToInventory(itemId1, -20) |> Handle
+RemoveItemsFromInventory(itemId1, 5) |> Handle
+RenameInventoryItem(itemId1, "NewItemName") |> Handle
+DeactivateInventoryItem(itemId1) |> Handle
 
 (Storage :?> EventStorage).ShowItemHistory itemId1
