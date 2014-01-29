@@ -1,16 +1,12 @@
-/*
- * Note: While Microsoft is not the author of this file, Microsoft is
- * offering you a license subject to the terms of the Microsoft Software
- * License Terms for Microsoft ASP.NET Model View Controller 4 Developer Preview.
- * Microsoft reserves all other rights. The notices below are provided
- * for informational purposes only and are not the license terms under
- * which Microsoft distributed this file.
+/*!
+ * jQuery UI CSS Framework 1.10.4
+ * http://jqueryui.com
  *
- * jQuery UI CSS Framework 1.8.11
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
  *
- * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
- *
- * http://docs.jquery.com/UI/Theming
+ * http://api.jqueryui.com/category/theming/
  */
 @import "jquery.ui.base.css";
 @import "jquery.ui.theme.css";
