@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Simplecqrs-fsharp by Thorium</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Simplecqrs-fsharp</h1>
+        <h2>Simple CQRS implemented with F# </h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Thorium/SimpleCQRS-FSharp/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Thorium/SimpleCQRS-FSharp/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Thorium/SimpleCQRS-FSharp" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p>Simple CQRS on F# (F-Sharp) 3.0</p>
+
+<p>Based on Greg Young's CQRS: <a href="https://github.com/gregoryyoung/m-r/tree/master/SimpleCQRS">https://github.com/gregoryyoung/m-r/tree/master/SimpleCQRS</a></p>
+
+<p>CQRS is Command and Query Responsibility Segregation -pattern.
+If you don't know that, use Google or look <a href="http://martinfowler.com/bliki/CQRS.html">http://martinfowler.com/bliki/CQRS.html</a>
+I have separated command side and query side as different projects.</p>
+
+<p>This is F# solution. Compared to C#:</p>
+
+<ul>
+<li>Simpler source code</li>
+<li>No need for any "InfrastructureCrap"</li>
+<li>Domain objects doesn't need to have parameter less constructors</li>
+<li>Interactive-driven development</li>
+</ul><p>What you will need to run this:</p>
+
+<ul>
+<li>Visual Studio 11 (Beta): <a href="http://www.microsoft.com/visualstudio/11/en-us">http://www.microsoft.com/visualstudio/11/en-us</a>
+</li>
+</ul><p>Optional:</p>
+
+<ul>
+<li>Reactive extensions: <a href="http://msdn.microsoft.com/en-us/data/gg577609">http://msdn.microsoft.com/en-us/data/gg577609</a>
+</li>
+</ul><p>There are two versions of event storage:
+1) Pure F# as EventStorage.fs</p>
+
+<ul>
+<li>Uses pure .NET Events with F# Observable as event bus</li>
+<li>Uses MailboxProcessor ("agents"/message passing) as event storage
+2) F# with Reactive Extensions as EventStorageRx.fs</li>
+<li>Uses reactive framework Subject as event bus</li>
+<li>Uses reactive framework ReplaySubject as event storage
+Although technical concept is different, the functionality is identical.</li>
+</ul><p>You can run this with F# interactive, directly from files and/or using Script.fsx.</p>
+
+<p>This QuerySide is just in-memory one as in Greg's example. 
+I suggest using F# Type Providers in QuerySide with real database...</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
